@@ -3,7 +3,7 @@ import "./App.css";
 
 import axios from "axios";
 
-function App() {
+export default function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [location, setLocation] = useState({});
   const [map, setMap] = useState("");
@@ -17,7 +17,7 @@ function App() {
       event.preventDefault();
       event.target.input.value = "";
 
-      const API = `https://eu1.locationiq.com/v1/search?key=${process.env.API_KEY}&q=${searchQuery}&format=json`;
+      const API = `https://eu1.locationiq.com/v1/search?key=${process.env.REACT_APP_API_KEY}&q=${searchQuery}&format=json`;
 
       const res = await axios.get(API);
       setLocation(res.data[0]);
@@ -28,7 +28,7 @@ function App() {
   }
 
   function handleMap(data) {
-    const API = `https://maps.locationiq.com/v3/staticmap?key=${process.env.API_KEY}&center=${data.lat},${data.lon}&zoom=9`;
+    const API = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_API_KEY}&center=${data.lat},${data.lon}&zoom=9`;
 
     setMap(API);
   }
@@ -49,5 +49,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
